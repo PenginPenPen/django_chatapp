@@ -4,6 +4,8 @@ from django.urls import reverse
 from .models import chat
 from .forms import chatForm
 from datetime import datetime
+from django.shortcuts import redirect
+from django.http import HttpResponse
 
 now_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
@@ -27,3 +29,9 @@ class chatView(ListView):
             context = self.get_context_data(object_list=self.object_list)
             context['form'] = form
             return self.render_to_response(context)
+
+
+def redirect_view(request):
+    response = redirect('/chat/timeline')
+    print(type(response))
+    return response
